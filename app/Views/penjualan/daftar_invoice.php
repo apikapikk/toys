@@ -5,10 +5,45 @@
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="pesan" data-pesan="<?= session('pesan') ?>"></div>
+            <style>
+                .justify-content-between {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                #date-pick {
+                    padding: 5px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    background-color: #f9f9f9;
+                    margin-bottom: 15px;
+                }
+
+                #cari_data {
+                    padding: 5px 20px;
+                    border: none;
+                    border-radius: 5px;
+                    background-color: #28a745;
+                    color: white;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                    margin-right: 1000px;
+                    margin-bottom: 15px;
+                }
+
+                #cari_data:hover {
+                    background-color: #218838;
+                }
+            </style>
+
             <div class="justify-content-between">
                 <input type="date" id="date-pick"/>
                 <button id="cari_data">Cari</button>
             </div>
+
             <div class="table-responsive">
                 
                 <table class="table table-bordered table-striped" id="tabel-invoice" width="100%">

@@ -1,12 +1,11 @@
 {
-  "name": "sejator/posci4",
+  "name": "vaniarusprameswari/kasir_toko_mainan",
   "type": "project",
-  "description": "Aplikasi sistem penjualan",
+  "description": "Aplikasi Kasir Toko Mainan",
   "license": "MIT",
   "authors": [
     {
-      "name": "Kasep Code",
-      "email": "asepsyaputra840@gmail.com"
+      "name": "Toko Mainan Cahaya"
     }
   ],
   "require": {

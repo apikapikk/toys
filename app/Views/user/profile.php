@@ -10,7 +10,6 @@
                         <img class="img-fluid img-circle avatar" src="<?= base_url('uploads/profile/' . esc($user->avatar)) ?>">
                     </div>
                     <h3 class="profile-username text-center"></h3>
-                    <p class="text-muted text-center">Tanggal Daftar : <?= esc(date('d M Y', strtotime($user->created_at))); ?></p>
                 </div>
                 <!-- /.card-body -->
             </div>
