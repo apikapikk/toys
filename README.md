@@ -1,4 +1,4 @@
-# Aplikasi Kasir (Point Of Sale)
+# Aplikasi Kasir Toko Mainan Cahaya
 Aplikasi sistem penjualan berbasis web menggunakan framework codeigniter 4.
 
 ## Persyaratan
