@@ -18,34 +18,36 @@
                     border-radius: 5px;
                     font-size: 16px;
                     background-color: #f9f9f9;
-                    margin-bottom: 15px;
+                    margin-left: -20px;
                 }
 
                 #cari_data {
                     padding: 5px 20px;
                     border: none;
                     border-radius: 5px;
-                    background-color: #28a745;
+                    background-color: #007BFF;
                     color: white;
                     font-size: 16px;
                     cursor: pointer;
                     transition: background-color 0.3s ease;
                     margin-right: 1000px;
-                    margin-bottom: 15px;
+                    margin-left: 5px;
                 }
 
                 #cari_data:hover {
                     background-color: #218838;
                 }
             </style>
-
-            <div class="justify-content-between">
-                <input type="date" id="date-pick"/>
-                <button id="cari_data">Cari</button>
-            </div>
-
             <div class="table-responsive">
-                
+                <div class="justify-content-between">
+                    <div class="d-flex p-4">
+                        <input type="date" id="date-pick"/>
+                        <button id="cari_data">Cari</button>
+                    </div>
+                </div>    
+                <?php if (esc(get_user('id_role') == 1) || esc(get_user('id_role') == 2)) : ?>
+                    <button class="btn btn-success mb-1" id="export_invoice"><i class="fas fa-file-excel"></i> Export</button>
+                <?php endif ?>
                 <table class="table table-bordered table-striped" id="tabel-invoice" width="100%">
                     <thead>
                         <tr>
@@ -127,6 +129,7 @@
         $(document).on('click', '.print', function(e) {
             window.open(`${BASE_URL}/penjualan/cetak/` + $(this).data('id'))
         });
+        
     });
 
     flatpickr("#date-pick", {
@@ -136,6 +139,29 @@
     $('#cari_data').on('click', function(e){
         table.draw();
     })
+    
+    $("#export_invoice").on("click", function(e) {
+        e.preventDefault(); // biar nggak reload halaman
+        const tanggal = $('#date-pick').val(); // ambil nilai tanggal dari input
+
+        $.ajax({
+            url: `${BASE_URL}/penjualan/exportExcel`, // URL tujuan
+            method: 'GET', // atau 'POST' kalau mau kirim data
+            data: { tanggal: tanggal }, // data yang dikirim ke server
+            success: function(res) {            
+                // buat <a> untuk download
+                const a = document.createElement('a');
+                a.href = res.file_url;
+                a.download = ''; // optional: bisa kasih nama file di sini kalau mau
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            },
+            error: function(xhr, status, error) {
+                console.error("Error: ", error); // kalau request error
+            }
+        });
+    });
 </script>
 
 <?php $this->endSection(); ?>

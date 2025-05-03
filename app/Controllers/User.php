@@ -145,19 +145,24 @@ class User extends BaseController
             $id = $this->request->getPost('id', FILTER_SANITIZE_NUMBER_INT);
             // jika id user yang akan di hapus di temukan, lanjut proses
             if($this->userModel->find($id)){
-                // fitur hapus user hanya untuk superadmin, selain itu dilarang
-                if (user()->id == 1) {
-                    $this->userModel->where('id !=', 1)->where('id !=', session('id'))->where('id', $id)->delete();
+                $this->userModel->where('id !=', 1)->where('id !=', session('id'))->where('id', $id)->delete();
                     $respon = [
                         'status' => true,
                         'pesan' => 'Data berhasil dihapus :)'
                     ];
-                } else {
-                    $respon = [
-                        'status' => false,
-                        'pesan' => 'Tidak diizinkan!'
-                    ];
-                }
+                // fitur hapus user hanya untuk superadmin, selain itu dilarang
+                // if (user()->id == 1) {
+                //     $this->userModel->where('id !=', 1)->where('id !=', session('id'))->where('id', $id)->delete();
+                //     $respon = [
+                //         'status' => true,
+                //         'pesan' => 'Data berhasil dihapus :)'
+                //     ];
+                // } else {
+                //     $respon = [
+                //         'status' => false,
+                //         'pesan' => 'Tidak diizinkan!'
+                //     ];
+                // }
                 return $this->response->setJSON($respon);
             }
         }

@@ -8,8 +8,11 @@ use App\Models\PelangganModel;
 use App\Models\PenjualanModel;
 use App\Models\TransaksiModel;
 use Irsyadulibad\DataTables\DataTables;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Penjualan extends BaseController {
+    protected $table = 'tb_item';
     protected $pelangganModel;
     protected $keranjangModel;
     protected $penjualanModel;
@@ -193,4 +196,99 @@ class Penjualan extends BaseController {
         }
         echo view('penjualan/cetak_termal', ['transaksi' => $transaksi]);
     }
+
+    public function exportExcel() {
+        $input = $this->request->getGet('tanggal');
+        // var_dump($input); die;
+        // Tarik data
+        $data = $this->transaksi
+        ->join('tb_penjualan', 'tb_penjualan.id = tb_transaksi.id_penjualan')
+        ->join('tb_users as pelanggan', 'pelanggan.id = tb_penjualan.id_pelanggan')
+        ->join('tb_users as kasir', 'kasir.id = tb_penjualan.id_user')
+        ->join('tb_item', 'tb_item.id = tb_transaksi.id_item');
+        if ($input != null && strpos($input, ' to ') !== false) {
+            [$start, $end] = explode(' to ', $input);
+            $data = $data->where([
+                'tb_penjualan.tanggal >=' => $start,
+                'tb_penjualan.tanggal <=' => $end
+            ]);
+        }
+        $data = $data->findAll();
+        // $builder = $this->builder('tb_penjualan')->get()->getResult();
+        // Instansiasi Spreadsheet
+        $spreadsheet = new SpreadSheet();
+        // styling
+        $style = [
+            'font'      => ['bold' => true],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+            ],
+        ];
+        $spreadsheet->getActiveSheet()->getStyle('A1:J1')->applyFromArray($style); // tambahkan style
+        $spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(30); // setting tinggi baris
+        // setting lebar kolom otomatis
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+        $spreadsheet->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+        // set kolom head
+        $spreadsheet->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'No')
+            ->setCellValue('B1', 'Invoice No')
+            ->setCellValue('C1', 'Tanggal')
+            ->setCellValue('D1', 'Pelanggan')
+            ->setCellValue('E1', 'Total Harga')
+            ->setCellValue('F1', 'Diskon')
+            ->setCellValue('G1', 'Jumlah Akhir')
+            ->setCellValue('H1', 'Pembayaran Tunai')
+            ->setCellValue('I1', 'Kembalian')
+            ->setCellValue('J1', 'Produk');
+        $row = 2;
+        // var_dump($data); die;
+        // looping data item
+        foreach ($data as $key => $dt) {
+            $spreadsheet->getActiveSheet()
+                ->setCellValue('A' . $row, $key + 1)
+                ->setCellValue('B' . $row, $dt['invoice'])
+                ->setCellValue('C' . $row, $dt['tanggal'])
+                ->setCellValue('D' . $row, $dt['username'])
+                ->setCellValue('E' . $row, $dt['total_harga'])
+                ->setCellValue('F' . $row, $dt['diskon'])
+                ->setCellValue('G' . $row, $dt['total_akhir'])
+                ->setCellValue('H' . $row, $dt['tunai'])
+                ->setCellValue('I' . $row, $dt['kembalian'])
+                ->setCellValue('J' . $row, $dt['nama_item']);
+            $row++;
+        }
+        // tulis dalam format .xlsx
+        $writer   = new Xlsx($spreadsheet);
+        $namaFile = 'Laporan_Invoice_' . date('d-m-Y') . '.xlsx';
+
+        // Tentukan path penyimpanan (contoh: public/exports/)
+        $savePath = FCPATH . 'exports/' . $namaFile;
+
+        // Pastikan folder 'exports' ada
+        if (!is_dir(FCPATH . 'exports')) {
+            mkdir(FCPATH . 'exports', 0777, true);
+        }
+
+        // Simpan file ke server
+        $writer->save($savePath);
+
+        // Kembalikan response JSON
+        return $this->response->setJSON([
+            'status' => 'success',
+            'message' => 'File berhasil dibuat',
+            'file_url' => base_url('exports/' . $namaFile),
+            'file_name' => $namaFile
+        ]);
+    }
+
 }
