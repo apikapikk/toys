@@ -232,6 +232,32 @@
 <script src="<?=base_url('plugins/jquery-ui/jquery-ui.min.js')?>"></script>
 <script src="<?=base_url('plugins/autoNumeric.min.js')?>"></script>
 <script>
+    $(document).ready(function() {
+        // Menonaktifkan tombol "Tambah" pada awalnya
+        $('#tambah').prop('disabled', true);
+        
+        // Menambahkan event listener pada input barcode
+        $('#barcode').on('input', function() {
+            checkInput();
+        });
+
+        // Menambahkan event listener pada input jumlah
+        $('#jumlah').on('input', function() {
+            checkInput();
+        });
+
+        // Fungsi untuk memeriksa apakah barcode dipilih dan jumlah lebih dari 0
+        function checkInput() {
+            const barcode = $('#barcode').val().trim();
+            const jumlah = $('#jumlah').val();
+
+            if (barcode !== "" && jumlah > 0) {
+                $('#tambah').prop('disabled', false);  // Aktifkan tombol
+            } else {
+                $('#tambah').prop('disabled', true);   // Nonaktifkan tombol
+            }
+        }
+    });
     let auto_numeric = new AutoNumeric('#tunai', {
         decimalCharacter: ",",
         decimalPlaces: 0,
