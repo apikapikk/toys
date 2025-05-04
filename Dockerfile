@@ -1,43 +1,32 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
-# Install dependensi dari apt
+# Install dependensi system dan ekstensi PHP
 RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    libicu-dev \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    git \
-    unzip \
-    libicu-dev \
     zlib1g-dev \
-    libzip-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install ekstensi PHP
-RUN docker-php-ext-install gd intl zip pdo pdo_mysql
+RUN docker-php-ext-install intl zip pdo pdo_mysql gd
 
-# Set ServerName untuk menghindari peringatan Apache
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# Salin file konfigurasi Apache
-COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
-
-# Aktifkan mod_rewrite
-RUN a2enmod rewrite
-
-# Salin file aplikasi
-COPY . /var/www/html/
-
-# Install dependensi Composer
+# Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install dependensi PHP
+# Salin source code ke container
+COPY . /app
+
+WORKDIR /app
+
+# Install dependency PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Set permission folder writable
-RUN chown -R www-data:www-data /var/www/html
+# Expose port
+EXPOSE 8080
 
-# Ekspos port 80
-EXPOSE 80
-
-# Pastikan Apache berjalan
-CMD ["apache2-foreground"]
+# Jalankan built-in server
+CMD ["php", "spark", "serve", "--host", "0.0.0.0", "--port", "8080"]
