@@ -1,4 +1,4 @@
-FROM php:8.2-cli
+FROM php:8.1-apache
 
 # Install dependensi system dan ekstensi PHP
 RUN apt-get update && apt-get install -y \
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-install intl zip pdo pdo_mysql gd
+RUN docker-php-ext-install gd intl zip mysqli pdo pdo_mysql
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
