@@ -32,10 +32,10 @@ class Database extends Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => 'localhost', // Ganti dengan hostname yang sesuai
-		'username' => 'root',
+		'hostname' => '',
+		'username' => '',
 		'password' => '',
-		'database' => 'nama_database', // Ganti dengan nama database yang sesuai
+		'database' => '',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
@@ -48,7 +48,6 @@ class Database extends Config
 		'strictOn' => false,
 		'failover' => [],
 		'port'     => 3306,
-		'socket'   => '/var/run/mysqld/mysqld.sock',
 	];
 
 	/**
