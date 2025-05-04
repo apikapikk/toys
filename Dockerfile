@@ -1,6 +1,6 @@
-FROM php:8.1-apache
+FROM php:7.4-apache
 
-# Install dependensi system dan ekstensi PHP
+# Install dependensi sistem dan ekstensi PHP
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# Install ekstensi PHP
 RUN docker-php-ext-install gd intl zip mysqli pdo pdo_mysql
 
 # Install Composer
@@ -28,5 +29,5 @@ RUN composer install --no-dev --optimize-autoloader
 # Expose port
 EXPOSE 8080
 
-# Jalankan built-in server
+# Jalankan built-in server bawaan CodeIgniter 4
 CMD ["php", "spark", "serve", "--host", "0.0.0.0", "--port", "8080"]
