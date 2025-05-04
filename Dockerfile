@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -y \
 # Install ekstensi PHP
 RUN docker-php-ext-install gd intl zip pdo pdo_mysql
 
+# Set ServerName untuk menghindari peringatan Apache
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 # Salin file konfigurasi Apache
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
@@ -33,4 +36,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Set permission folder writable
 RUN chown -R www-data:www-data /var/www/html
 
+# Ekspos port 80
 EXPOSE 80
+
+# Pastikan Apache berjalan
+CMD ["apache2-foreground"]
