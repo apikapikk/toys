@@ -48,6 +48,7 @@ class Database extends Config
 		'strictOn' => false,
 		'failover' => [],
 		'port'     => 3306,
+		'socket'   => '/var/run/mysqld/mysqld.sock',
 	];
 
 	/**
