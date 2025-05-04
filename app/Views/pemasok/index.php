@@ -81,7 +81,11 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: `${BASE_URL}/pemasok/ajax`
+                url: `${BASE_URL}/pemasok/ajax`,
+                beforeSend: function(xhr) {
+                // Menambahkan token CSRF di header
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
             },
             columns: [{
                     render: function(data, type, row, meta) {
