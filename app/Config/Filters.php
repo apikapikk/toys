@@ -34,7 +34,12 @@ class Filters extends BaseConfig
 			// 'honeypot',
 			'csrf' => [
 				'except' => [
-								'pemasok/*',  // pengecualian untuk tambah pemasok
+								'pemasok/*',
+								'item/*',
+								'pelanggan/*',
+								'penjualan/*',
+								'stok/*',
+								'unit/*',  // pengecualian untuk tambah pemasok
 				]
 ],
 			'ceklogin' => [
