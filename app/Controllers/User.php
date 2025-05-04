@@ -170,69 +170,86 @@ class User extends BaseController
 
     public function profile()
     {
+        // Ambil data pengguna dari sesi atau dari token pengguna yang sedang login
+        $userId = session('id'); // Sesuaikan dengan bagaimana sistem login kamu
+
         $data = [
             'title' => 'Edit Profil',
-            'user' => $this->userModel->getUser(session('id'))
+            'user' => $this->userModel->getUser($userId) // Ambil data user dari database berdasarkan ID
         ];
+
         echo view('user/profile', $data);
     }
 
-    public function updateProfile()
-{
-    if ($this->request->isAJAX()) {
-        $rules = [
-            'nama'     => ['rules' => 'required'],
-            'username' => ['rules' => 'required|alpha_numeric|is_unique[tb_users.username,id,{id}]'],
-            'email'    => ['rules' => 'required|valid_email|is_unique[tb_users.email,id,{id}]'],
-        ];
+     public function updateProfile()
+    {
+        if ($this->request->isAJAX()) {
+            // Tentukan aturan validasi
+            $rules = [
+                'nama'     => 'required',
+                'username' => 'required|alpha_numeric|is_unique[tb_users.username,id,{id}]',
+                'email'    => 'required|valid_email|is_unique[tb_users.email,id,{id}]',
+            ];
 
-        // Validasi avatar jika ada
-        if ($this->request->getFile('avatar')) {
-            $rules['avatar'] = 'max_size[avatar,1024]|is_image[avatar]|mime_in[avatar,image/png,image/jpg,image/jpeg]|max_dims[avatar,500,500]';
-        }
+            // Cek jika ada file avatar yang diupload
+            if ($this->request->getFile('avatar')) {
+                $rules['avatar'] = 'max_size[avatar,1024]|is_image[avatar]|mime_in[avatar,image/png,image/jpg,image/jpeg]|max_dims[avatar,500,500]';
+            }
 
-        if (!$this->validate($rules)) {
+            // Validasi form
+            if (!$this->validate($rules)) {
+                return $this->response->setJSON([
+                    'validasi' => false,
+                    'error'    => $this->validator->getErrors()
+                ]);
+            }
+
+            // Ambil ID pengguna yang sedang login
+            $userId = session('id');
+
+            // Persiapkan data yang akan diupdate
+            $data = [
+                'id'       => $userId,
+                'username' => strtolower($this->request->getPost('username')),
+                'email'    => strtolower($this->request->getPost('email')),
+                'nama'     => ucwords($this->request->getPost('nama')),
+                'alamat'   => ucwords($this->request->getPost('alamat')),
+            ];
+
+            // Cek jika password diubah
+            if ($this->request->getPost('password')) {
+                $data['password'] = buat_password($this->request->getPost('password'));
+            }
+
+            // Cek jika ada avatar baru yang diupload
+            $photo = $this->request->getPost('avatarLama');
+            $file  = $this->request->getFile('avatar');
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+                $namaRandom = $file->getRandomName();
+                $file->move(FCPATH . 'uploads/profile', $namaRandom);
+
+                // Hapus foto lama jika ada
+                if ($photo != 'avatar.jpg' && file_exists(FCPATH . 'uploads/profile/' . $photo)) {
+                    unlink(FCPATH . 'uploads/profile/' . $photo);
+                }
+                $data['avatar'] = $namaRandom;
+            }
+
+            // Simpan data pengguna yang sudah diupdate
+            $this->userModel->save($data);
+
+            // Ambil kembali data pengguna yang baru untuk ditampilkan
+            $user = $this->userModel->getUser($userId);
+            unset($user->password, $user->token, $user->status, $user->ip_address); // Sembunyikan beberapa informasi sensitif
+
+            // Kirim respons sukses dan data pengguna yang sudah diupdate
             return $this->response->setJSON([
-                'validasi' => false,
-                'error'    => $this->validator->getErrors()
+                'validasi' => true,
+                'sukses'   => true,
+                'user'     => $user
             ]);
         }
-
-        $id = session('id');
-        $data = [
-            'id'       => $id,
-            'username' => strtolower($this->request->getPost('username')),
-            'email'    => strtolower($this->request->getPost('email')),
-            'nama'     => ucwords($this->request->getPost('nama')),
-            'alamat'   => ucwords($this->request->getPost('alamat')),
-        ];
-
-        if ($this->request->getPost('password')) {
-            $data['password'] = buat_password($this->request->getPost('password'));
-        }
-
-        $photo = $this->request->getPost('avatarLama');
-        $file  = $this->request->getFile('avatar');
-        if ($file && $file->isValid() && !$file->hasMoved()) {
-            $namaRandom = $file->getRandomName();
-            $file->move(FCPATH . 'uploads/profile', $namaRandom);
-            if ($photo != 'avatar.jpg' && file_exists(FCPATH . 'uploads/profile/' . $photo)) {
-                unlink(FCPATH . 'uploads/profile/' . $photo);
-            }
-            $data['avatar'] = $namaRandom;
-        }
-
-        $this->userModel->save($data);
-        $user = $this->userModel->getUser($id);
-        unset($user->password, $user->token, $user->status, $user->ip_address);
-
-        return $this->response->setJSON([
-            'validasi' => true,
-            'sukses'   => true,
-            'user'     => $user
-        ]);
     }
-}
 
 
 }
