@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Apr 2025 pada 14.20
+-- Waktu pembuatan: 04 Bulan Mei 2025 pada 12.37
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -198,16 +198,16 @@ CREATE TABLE `tb_item` (
 --
 
 INSERT INTO `tb_item` (`id`, `barcode`, `nama_item`, `id_kategori`, `id_unit`, `id_pemasok`, `harga`, `stok`, `gambar`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'A0001', 'Ular Tangga', 3, 3, 2, 15000, 47, '1745682815_7f1e87e28b6c3b4a234e.png', '2021-10-12 18:32:35', '2025-04-27 01:16:12', '0000-00-00 00:00:00'),
-(2, 'A0002', 'Egrang Bathok', 4, 19, 2, 30000, 50, '1745735851_4df1baa353caf3f740d1.png', '2021-10-19 22:33:38', '2025-04-27 13:37:31', '0000-00-00 00:00:00'),
-(3, 'A0003', 'Gasing Bambu', 2, 1, 1, 16000, 66, '1745736084_fe40c7f8b2ff701b1748.png', '2021-10-19 22:33:55', '2025-04-27 13:41:24', '0000-00-00 00:00:00'),
-(4, 'A0004', 'Yoyo', 2, 1, 1, 12000, 47, '1745736219_8523336ca73196bdba48.png', '2021-10-19 22:34:42', '2025-04-27 13:43:39', '0000-00-00 00:00:00'),
-(5, 'A0005', 'Kelereng', 4, 1, 1, 30000, 45, '1745736411_cd37d73e8a6a2aece0f9.png', '2021-10-20 21:26:17', '2025-04-27 13:46:51', '0000-00-00 00:00:00'),
-(6, 'A0006', 'Kapal Otok-Otok', 7, 1, 1, 10000, 30, '1745736576_74ef779afe126b8958e1.png', '2021-10-20 22:31:17', '2025-04-27 13:49:36', '0000-00-00 00:00:00'),
-(7, 'A0007', 'Congklak', 3, 3, 3, 20000, 20, '1745736776_df056bba4ecf920833a6.png', '2022-01-21 18:57:34', '2025-04-27 13:52:56', '0000-00-00 00:00:00'),
+(1, 'A0001', 'Ular Tangga', 3, 3, 2, 15000, 40, '1745682815_7f1e87e28b6c3b4a234e.png', '2021-10-12 18:32:35', '2025-05-03 22:22:01', '0000-00-00 00:00:00'),
+(2, 'A0002', 'Egrang Bathok', 4, 19, 2, 30000, 51, '1745735851_4df1baa353caf3f740d1.png', '2021-10-19 22:33:38', '2025-04-27 13:37:31', '0000-00-00 00:00:00'),
+(3, 'A0003', 'Gasing Bambu', 2, 1, 1, 16000, 59, '1745736084_fe40c7f8b2ff701b1748.png', '2021-10-19 22:33:55', '2025-05-03 22:22:01', '0000-00-00 00:00:00'),
+(4, 'A0004', 'Yoyo', 2, 1, 1, 12000, 43, '1745736219_8523336ca73196bdba48.png', '2021-10-19 22:34:42', '2025-04-29 12:08:08', '0000-00-00 00:00:00'),
+(5, 'A0005', 'Kelereng', 4, 1, 1, 30000, 40, '1745736411_cd37d73e8a6a2aece0f9.png', '2021-10-20 21:26:17', '2025-05-03 21:20:15', '0000-00-00 00:00:00'),
+(6, 'A0006', 'Kapal Otok-Otok', 7, 1, 1, 10000, 35, '1745736576_74ef779afe126b8958e1.png', '2021-10-20 22:31:17', '2025-04-27 13:49:36', '0000-00-00 00:00:00'),
+(7, 'A0007', 'Congklak', 3, 3, 3, 20000, 15, '1745736776_df056bba4ecf920833a6.png', '2022-01-21 18:57:34', '2025-05-03 22:18:29', '0000-00-00 00:00:00'),
 (8, 'A0008', 'Egrang Bambu', 4, 1, 2, 25000, 5, '1745737067_7c5ec7adbb25fe8e54e7.png', '2025-04-27 13:55:13', '2025-04-27 13:57:47', '0000-00-00 00:00:00'),
-(9, 'A0009', 'Ketapel Kayu', 5, 1, 3, 11000, 12, '1745737342_3bb7da5f2c0351d79f76.png', '2025-04-27 14:02:22', '2025-04-27 14:02:22', '0000-00-00 00:00:00'),
-(10, 'A0010', 'Wayang Kulit', 6, 1, 1, 110000, 100, '1745737612_f4afcefdb63fc4a4e667.png', '2025-04-27 14:06:52', '2025-04-27 14:06:52', '0000-00-00 00:00:00');
+(9, 'A0009', 'Ketapel Kayu', 5, 1, 3, 11000, 7, '1745737342_3bb7da5f2c0351d79f76.png', '2025-04-27 14:02:22', '2025-05-03 11:16:59', '0000-00-00 00:00:00'),
+(10, 'A0010', 'Wayang Kulit', 6, 1, 1, 110000, 97, '1745737612_f4afcefdb63fc4a4e667.png', '2025-04-27 14:06:52', '2025-05-03 21:14:41', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -319,7 +319,7 @@ CREATE TABLE `tb_pengaturan` (
 --
 
 INSERT INTO `tb_pengaturan` (`id`, `nama_toko`, `no_telp`, `alamat`) VALUES
-(1, 'Toko Mainan Cahaya', '082334343434', 'Jl. Blauran Surabaya');
+(1, 'Toko Mainan Cahaya', '082334343435', 'Jl. Blauran Surabaya Pusat');
 
 -- --------------------------------------------------------
 
@@ -350,7 +350,14 @@ CREATE TABLE `tb_penjualan` (
 --
 
 INSERT INTO `tb_penjualan` (`id`, `invoice`, `id_pelanggan`, `total_harga`, `diskon`, `total_akhir`, `tunai`, `kembalian`, `catatan`, `tanggal`, `id_user`, `ip_address`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, 'INV2504220001', 1, 20000, 5, 19000, 20000, 1000, 'Thank you', '2025-04-22', 2, '::1', '2025-04-22 11:01:04', '2025-04-22 11:01:04', '0000-00-00 00:00:00');
+(2, 'INV2504220001', 1, 20000, 5, 19000, 20000, 1000, 'Thank you', '2025-04-22', 2, '::1', '2025-04-22 11:01:04', '2025-04-22 11:01:04', '0000-00-00 00:00:00'),
+(3, 'INV2504290001', 1, 68000, 0, 68000, 70000, 2000, 'Thankyou!', '2025-04-29', 1, '::1', '2025-04-29 12:08:08', '2025-04-29 12:08:08', '0000-00-00 00:00:00'),
+(4, 'INV2505010001', 1, 44000, 0, 44000, 50000, 6000, 'Terima kasih', '2025-05-01', 1, '::1', '2025-05-01 13:13:41', '2025-05-01 13:13:41', '0000-00-00 00:00:00'),
+(5, 'INV2505030001', 1, 246000, 5, 233700, 300000, 66300, 'Jangan lupa datang kembali!:)', '2025-05-03', 1, '::1', '2025-05-03 11:16:59', '2025-05-03 11:16:59', '0000-00-00 00:00:00'),
+(6, 'INV2505030002', 1, 330000, 0, 330000, 350000, 0, 'Happy Shop', '2025-05-03', 1, '::1', '2025-05-03 21:14:41', '2025-05-03 21:14:41', '0000-00-00 00:00:00'),
+(7, 'INV2505030003', 1, 150000, 0, 150000, 160000, 10000, 'coba', '2025-05-03', 1, '::1', '2025-05-03 21:20:15', '2025-05-03 21:20:15', '0000-00-00 00:00:00'),
+(8, 'INV2505030004', 1, 100000, 5, 95000, 100000, 5000, 'coba', '2025-05-03', 2, '::1', '2025-05-03 22:18:29', '2025-05-03 22:18:29', '0000-00-00 00:00:00'),
+(9, 'INV2505030005', 1, 62000, 0, 62000, 65000, 3000, '-', '2025-05-03', 3, '::1', '2025-05-03 22:22:01', '2025-05-03 22:22:01', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -428,7 +435,17 @@ CREATE TABLE `tb_transaksi` (
 --
 
 INSERT INTO `tb_transaksi` (`id_transaksi`, `id_penjualan`, `id_item`, `harga_item`, `jumlah_item`, `diskon_item`, `subtotal`, `ip_address`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 2, 3, 20000, 1, 0, 20000, '::1', '2025-04-22 11:01:04', '2025-04-22 11:01:04', '0000-00-00 00:00:00');
+(3, 2, 3, 20000, 1, 0, 20000, '::1', '2025-04-22 11:01:04', '2025-04-22 11:01:04', '0000-00-00 00:00:00'),
+(4, 3, 3, 16000, 2, 0, 32000, '::1', '2025-04-29 12:08:08', '2025-04-29 12:08:08', '0000-00-00 00:00:00'),
+(5, 3, 4, 12000, 3, 0, 36000, '::1', '2025-04-29 12:08:08', '2025-04-29 12:08:08', '0000-00-00 00:00:00'),
+(6, 4, 9, 11000, 4, 0, 44000, '::1', '2025-05-01 13:13:41', '2025-05-01 13:13:41', '0000-00-00 00:00:00'),
+(7, 5, 3, 16000, 3, 0, 48000, '::1', '2025-05-03 11:16:59', '2025-05-03 11:16:59', '0000-00-00 00:00:00'),
+(8, 5, 9, 11000, 1, 0, 198000, '::1', '2025-05-03 11:16:59', '2025-05-03 11:16:59', '0000-00-00 00:00:00'),
+(9, 6, 10, 110000, 3, 0, 330000, '::1', '2025-05-03 21:14:41', '2025-05-03 21:14:41', '0000-00-00 00:00:00'),
+(10, 7, 5, 30000, 5, 0, 150000, '::1', '2025-05-03 21:20:15', '2025-05-03 21:20:15', '0000-00-00 00:00:00'),
+(11, 8, 7, 20000, 5, 0, 100000, '::1', '2025-05-03 22:18:29', '2025-05-03 22:18:29', '0000-00-00 00:00:00'),
+(12, 9, 3, 16000, 2, 0, 32000, '::1', '2025-05-03 22:22:01', '2025-05-03 22:22:01', '0000-00-00 00:00:00'),
+(13, 9, 1, 15000, 2, 0, 30000, '::1', '2025-05-03 22:22:01', '2025-05-03 22:22:01', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -500,9 +517,9 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id`, `email`, `username`, `password`, `nama`, `alamat`, `id_role`, `avatar`, `status`, `token`, `ip_address`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'superadmin@gmail.com', 'superadmin', '$2y$10$S4SuvPnsumu0MneKWZowo.uFqbsXGKmJd/3otCkFftI2epqO7t8tO', 'Super Admin', 'Surabaya', 1, '1737353736_cfe46c950b5d290e591d.jpg', 1, '7b9abf00d73a783b2f1559517823fd60331f9b0ae065f68b732be0a364ab7347', '0.0.0.0', '2021-10-12 18:29:41', '2025-04-26 22:47:53', NULL),
-(2, 'vannvaniarzy@gmail.com', 'admin', '$2y$10$uSWLdmrFJ0kaLIr5Ma5MOOg/BrOo8MUR.J/oitL.9h.Jd1uBUtNDm', 'Admin Vania', 'Jl. Simorejo Sari', 2, '1737427617_96d6ce76c61661ae4519.png', 1, 'bdbc976f1212965d03dcce1fecbcc811d3c817b7efd1aa61c090b5d7913b895f', '0.0.0.0', '2021-10-12 18:29:41', '2025-04-26 22:40:39', NULL),
-(3, 'jihanadisti@gmail.com', 'kasir', '$2y$10$Jxv4ddr/FjJwsSugfV1Qlua8Tj1C3P.GCaGFXPCAcKCrfEHnk7cKC', 'Kasir Jihan', 'Jl. Asemrowo', 3, '1737427175_e1d360bee18dfe89b94a.png', 1, '2250b9ff18cadc6236b9d7134e2d5aa35203d263cf9d34521f66b97a6ae06be6', '0.0.0.0', '2021-10-12 18:29:41', '2025-04-26 22:49:11', NULL);
+(1, 'superadmin1@gmail.com', 'superadmin', '$2y$10$9klb/fFRUOFuxduO0HpgieZIHy8Znc5wWhJwS7oc/DAaZUk5ofE.y', 'Super Admin', 'Surabaya Pusat', 1, '1737353736_cfe46c950b5d290e591d.jpg', 1, '7b9abf00d73a783b2f1559517823fd60331f9b0ae065f68b732be0a364ab7347', '0.0.0.0', '2021-10-12 18:29:41', '2025-05-03 22:10:36', NULL),
+(2, 'vannvaniarzy@gmail.com', 'admin', '$2y$10$uqsIuhBTp8yzblVpGloPPuNHtydjfJqJDev1UhYx.jGAP2Rd7wh0G', 'Admin Vania', 'Jl. Simorejo Sari A', 2, '1737427617_96d6ce76c61661ae4519.png', 1, 'bdbc976f1212965d03dcce1fecbcc811d3c817b7efd1aa61c090b5d7913b895f', '0.0.0.0', '2021-10-12 18:29:41', '2025-05-03 22:19:54', NULL),
+(3, 'jihanadisti@gmail.com', 'kasir', '$2y$10$eZidcQdtAZYnAqnfsaOvHeDZGSPG9p6XvyOl3t3jAWmk8UlpA5xmG', 'Kasir Jihan', 'Jl. Asemrowo 2', 3, '1737427175_e1d360bee18dfe89b94a.png', 1, '2250b9ff18cadc6236b9d7134e2d5aa35203d263cf9d34521f66b97a6ae06be6', '0.0.0.0', '2021-10-12 18:29:41', '2025-05-03 22:21:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -607,25 +624,25 @@ ALTER TABLE `tb_bulan_tahun`
 -- AUTO_INCREMENT untuk tabel `tb_item`
 --
 ALTER TABLE `tb_item`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pelanggan`
 --
 ALTER TABLE `tb_pelanggan`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pemasok`
 --
 ALTER TABLE `tb_pemasok`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pengaturan`
@@ -637,7 +654,7 @@ ALTER TABLE `tb_pengaturan`
 -- AUTO_INCREMENT untuk tabel `tb_penjualan`
 --
 ALTER TABLE `tb_penjualan`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_roles`
@@ -649,25 +666,25 @@ ALTER TABLE `tb_roles`
 -- AUTO_INCREMENT untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  MODIFY `id_stok` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_stok` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id_transaksi` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_transaksi` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_unit`
 --
 ALTER TABLE `tb_unit`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
