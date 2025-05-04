@@ -243,7 +243,7 @@ class Penjualan extends BaseController {
             ->setCellValue('A1', 'No')
             ->setCellValue('B1', 'Invoice No')
             ->setCellValue('C1', 'Tanggal')
-            ->setCellValue('D1', 'Pelanggan')
+            ->setCellValue('D1', 'User')
             ->setCellValue('E1', 'Total Harga')
             ->setCellValue('F1', 'Diskon')
             ->setCellValue('G1', 'Jumlah Akhir')
