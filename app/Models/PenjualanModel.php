@@ -86,13 +86,53 @@ class PenjualanModel extends Model
 
     public function laporanPenjualan($tahun)
 {
-    return $this->builder('tb_penjualan')
+    // Buat array bulan
+    $bulan = [
+        '01' => 'Januari',
+        '02' => 'Februari',
+        '03' => 'Maret',
+        '04' => 'April',
+        '05' => 'Mei',
+        '06' => 'Juni',
+        '07' => 'Juli',
+        '08' => 'Agustus',
+        '09' => 'September',
+        '10' => 'Oktober',
+        '11' => 'November',
+        '12' => 'Desember',
+    ];
+
+    // Ambil data penjualan berdasarkan bulan dan tahun
+    $dataPenjualan = $this->builder('tb_penjualan')
         ->select('MONTH(tanggal) as bulan, SUM(total_harga) as total')
         ->where('YEAR(tanggal)', $tahun)
         ->groupBy('MONTH(tanggal)')
-        ->orderBy('bulan', 'ASC')  // Mengurutkan berdasarkan bulan
+        ->orderBy('bulan', 'ASC')
         ->get()
-        ->getResultArray();  // Mengembalikan data dalam format array
+        ->getResultArray();
+
+    // Masukkan data bulan yang tidak ada penjualannya (total = 0)
+    foreach ($bulan as $key => $namaBulan) {
+        $found = false;
+        foreach ($dataPenjualan as &$penjualan) {
+            if ($penjualan['bulan'] == $key) {
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
+            // Jika bulan tidak ditemukan, tambahkan dengan total 0
+            $dataPenjualan[] = ['bulan' => $key, 'total' => 0];
+        }
+    }
+
+    // Sort kembali berdasarkan bulan
+    usort($dataPenjualan, function ($a, $b) {
+        return $a['bulan'] - $b['bulan'];
+    });
+
+    return $dataPenjualan;
 }
+
 
 }

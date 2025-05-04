@@ -50,6 +50,6 @@ vendor/
 public/uploads/profile/*
 !public/uploads/profile/index.html
 !public/uploads/profile/avatar.jpg
-public/uploads/produk/*
+#public/uploads/produk/*
 !public/uploads/produk/index.html
 !public/uploads/produk/gambar.jpg

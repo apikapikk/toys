@@ -93,9 +93,6 @@
 <?=$this->endSection();?>
 
 <?=$this->section('js');?>
-<script>
-  const BASE_URL = "<?=base_url()?>";
-</script>
 <script src="<?=base_url('plugins/chart.js/Chart.min.js')?>"></script>
 <script src="<?=base_url('js/dashboard.js')?>"></script>
 <?=$this->endSection();?>
