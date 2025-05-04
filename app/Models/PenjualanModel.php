@@ -85,7 +85,14 @@ class PenjualanModel extends Model
 
 
     public function laporanPenjualan($tahun)
-    {
-        return $this->builder('tb_bulan_tahun')->select('bulan')->selectCount('jumlah_item', 'total')->join('tb_transaksi', 'date_format(created_at, "%m-%Y") = bln_thn', 'left')->where('tahun', $tahun)->groupBy('bln_thn')->get()->getResult();
-    }
+{
+    return $this->builder('tb_penjualan')
+        ->select('MONTH(tanggal) as bulan, SUM(total_harga) as total')
+        ->where('YEAR(tanggal)', $tahun)
+        ->groupBy('MONTH(tanggal)')
+        ->orderBy('bulan', 'ASC')  // Mengurutkan berdasarkan bulan
+        ->get()
+        ->getResultArray();  // Mengembalikan data dalam format array
+}
+
 }
