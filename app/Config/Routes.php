@@ -41,6 +41,8 @@ $routes->group('auth', function ($routes) {
 
 $routes->get('stok/masuk', 'Transaksi::index');
 $routes->get('stok/keluar', 'Transaksi::index');
+$routes->get('profile', 'User::profile', ['filter' => 'auth']);
+$routes->post('profile/update', 'User::updateProfile', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

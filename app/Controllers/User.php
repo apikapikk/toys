@@ -176,4 +176,63 @@ class User extends BaseController
         ];
         echo view('user/profile', $data);
     }
+
+    public function updateProfile()
+{
+    if ($this->request->isAJAX()) {
+        $rules = [
+            'nama'     => ['rules' => 'required'],
+            'username' => ['rules' => 'required|alpha_numeric|is_unique[tb_users.username,id,{id}]'],
+            'email'    => ['rules' => 'required|valid_email|is_unique[tb_users.email,id,{id}]'],
+        ];
+
+        // Validasi avatar jika ada
+        if ($this->request->getFile('avatar')) {
+            $rules['avatar'] = 'max_size[avatar,1024]|is_image[avatar]|mime_in[avatar,image/png,image/jpg,image/jpeg]|max_dims[avatar,500,500]';
+        }
+
+        if (!$this->validate($rules)) {
+            return $this->response->setJSON([
+                'validasi' => false,
+                'error'    => $this->validator->getErrors()
+            ]);
+        }
+
+        $id = session('id');
+        $data = [
+            'id'       => $id,
+            'username' => strtolower($this->request->getPost('username')),
+            'email'    => strtolower($this->request->getPost('email')),
+            'nama'     => ucwords($this->request->getPost('nama')),
+            'alamat'   => ucwords($this->request->getPost('alamat')),
+        ];
+
+        if ($this->request->getPost('password')) {
+            $data['password'] = buat_password($this->request->getPost('password'));
+        }
+
+        $photo = $this->request->getPost('avatarLama');
+        $file  = $this->request->getFile('avatar');
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $namaRandom = $file->getRandomName();
+            $file->move(FCPATH . 'uploads/profile', $namaRandom);
+            if ($photo != 'avatar.jpg' && file_exists(FCPATH . 'uploads/profile/' . $photo)) {
+                unlink(FCPATH . 'uploads/profile/' . $photo);
+            }
+            $data['avatar'] = $namaRandom;
+        }
+
+        $this->userModel->save($data);
+        $user = $this->userModel->getUser($id);
+        unset($user->password, $user->token, $user->status, $user->ip_address);
+
+        return $this->response->setJSON([
+            'validasi' => true,
+            'sukses'   => true,
+            'user'     => $user
+        ]);
+    }
+}
+
+
 }

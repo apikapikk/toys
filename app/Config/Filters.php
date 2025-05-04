@@ -40,7 +40,8 @@ class Filters extends BaseConfig
 								'penjualan/*',
 								'stok/*',
 								'unit/*',
-								'user/*',  // pengecualian untuk tambah pemasok
+								'user/*',
+								'profile/*',  // pengecualian untuk tambah pemasok
 				]
 ],
 			'ceklogin' => [

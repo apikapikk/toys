@@ -19,7 +19,7 @@
         <div class="col-md-9">
             <div class="card card-primary card-outline">
                 <div class="card-body">
-                    <?= form_open_multipart(base_url('/user/ubah'), ['csrf_id' => 'token']); ?>
+                <?= form_open_multipart(base_url('/profile/update'), ['csrf_id' => 'token']); ?>
                     <div class="form-group row">
                         <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                         <div class="col-sm-10">
