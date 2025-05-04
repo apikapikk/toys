@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libicu-dev \
     zlib1g-dev \
+    libzip-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install ekstensi PHP
