@@ -19,4 +19,4 @@ Aplikasi sistem penjualan berbasis web menggunakan framework codeigniter 4.
  - Jalankan aplikasi `php spark serve` kemudian buka urlnya `http://localhost:8080/`
  - Akun untuk login :
     - Username : superadmin / admin / kasir
-    - Password : superadmin / admin / kasir
+    - Password : superadmin / admin / kasir# toys
