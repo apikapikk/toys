@@ -1,15 +1,6 @@
-# Gunakan image dasar PHP 7.4 dengan Apache
 FROM php:7.4-apache
 
-# Install dependensi sistem dan tambahkan repositori backports agar libzip versi kompatibel tersedia
-RUN apt-get update && apt-get install -y \
-    lsb-release \
-    apt-transport-https \
-    ca-certificates \
-    gnupg2 && \
-    echo "deb http://deb.debian.org/debian $(lsb_release -cs)-backports main" >> /etc/apt/sources.list
-
-# Install dependensi untuk ekstensi PHP yang dibutuhkan
+# Install dependensi sistem dan ekstensi PHP
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -19,27 +10,24 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libfreetype6-dev \
     zlib1g-dev \
-    pkg-config \
-    && docker-php-ext-configure zip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        gd \
-        intl \
-        zip \
-        mysqli \
-        pdo \
-        pdo_mysql \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Aktifkan mod_rewrite untuk Apache (berguna untuk framework seperti Laravel, CodeIgniter, dsb.)
-RUN a2enmod rewrite
+# Install ekstensi PHP
+RUN docker-php-ext-install gd intl zip mysqli pdo pdo_mysql
 
-# Salin semua file project ke folder default Apache
-COPY . /var/www/html/
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set permission
-RUN chown -R www-data:www-data /var/www/html
+# Salin source code ke container
+COPY . /app
 
-# Ekspos port 80
-EXPOSE 80
+WORKDIR /app
+
+# Install dependency PHP
+RUN composer install --no-dev --optimize-autoloader
+
+# Expose port
+EXPOSE 8080
+
+# Jalankan built-in server bawaan CodeIgniter 4
+CMD ["php", "spark", "serve", "--host", "0.0.0.0", "--port", "8080"]
